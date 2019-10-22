@@ -7,6 +7,7 @@
         const PRODUCTS_URL = 'https://acme-users-api-rev.herokuapp.com/api/products';
         const COMPANIES_URL = 'https://acme-users-api-rev.herokuapp.com/api/companies';
         const OFFERINGS_URL = 'https://acme-users-api-rev.herokuapp.com/api/Offerings';
+        const array = [];
 
         Promise.all([fetch(PRODUCTS_URL),fetch(COMPANIES_URL),fetch(OFFERINGS_URL)])
         .then(response => Promise.all(response.map(r=> r.json())))
@@ -14,11 +15,25 @@
             const products = data[0];
             const company = data[1];
             const offering = data[2];
-            console.log(products, company, offering);
+            // console.log(products, company, offering);
+            // array.push(products, company, offering);
+            
+            const userArray = products.map( data =>`
+            <div class='productName>
+            <div><a href="#${data.id}">${data.name}</a></div>
+            <div>${data.description}</div>
+            <ul>
+            <li>Offered by: $</li>
+            <li>Offered by: $</li>
+
+            </ul>
+            </div>`
+        ).join('');
+        document.querySelector('#container').innerHTML = userArray;
+        console.log(userArray);
         })
         .catch(e => console.log(e));
-
-
+        console.log(array);
 
     // const afunc = async() => {
     //     const response = await fetch('https://acme-users-api-rev.herokuapp.com/api/products')
@@ -32,11 +47,19 @@
     //         <div>${data.description}</div>
     //         <ul>
     //         <li>Offered by: $${data.suggestedPrice}</li>
+    //         <li>Offered by: $${processOfferings(array[0])}</li>
+
     //         </ul>
     //         </div>`
-    //     ).join('')s
-    //     document.querySelector('#container').innerHTML = userArray
+    //     ).join('');
+    //     document.querySelector('#container').innerHTML = userArray;
     // }
     // afunc()
+
+
+
+    // copied FUNCTIONS
+
+    // const searchFunction
     </script>
 </html>
